@@ -1,17 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import Hello from './components/hello.jsx';
-import './App.css'
+import { sculptureList } from "./components/data.js";
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [sculptureShown, setSculptureShown] = useState(sculptureList[0]);
+
+  function nextSculpture() {
+    setSculptureShown(sculptureList[sculptureList.indexOf(sculptureShown) + 1]);
+  }
 
   return (
     <>
-      <Hello />
+      <button onClick={() => nextSculpture()}></button>
+      <div key={sculptureShown}>
+        <h4>{sculptureShown.name}</h4>
+        <h5>{sculptureShown.artist}</h5>
+        <p>{sculptureShown.description}</p>
+        <img src={sculptureShown.url} alt={sculptureShown.alt} />
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
